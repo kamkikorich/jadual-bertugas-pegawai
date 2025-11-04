@@ -5,7 +5,7 @@ body {
     background-image: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
     color: #333;
     display: flex;
-    flex-direction: column; /* Susun container secara menegak */
+    flex-direction: column; /* SUSUN SECARA MENEGAK */
     justify-content: flex-start;
     align-items: center;
     min-height: 100vh;
@@ -50,42 +50,23 @@ h1 {
 #leave-list li .reason { display: block; font-style: italic; color: #555; font-size: 0.9em; margin-top: 4px; }
 
 /* =========================================
- GAYA BARU UNTUK PANEL ADMIN (SATU HALAMAN)
+ GAYA BARU UNTUK PANEL KEMASKINI
 =========================================
 */
-
-/* Sembunyikan panel secara lalai */
-.hidden {
-    display: none;
-}
-
-#admin-section {
+#update-section {
     background-color: #fdfdfd;
-    padding: 20px;
 }
 
-#show-login-button {
-    width: 100%;
-    padding: 15px;
-    font-size: 1.1em;
+.admin-container {
+    padding: 20px 30px 30px 30px;
 }
 
-.login-container, .admin-container {
-    padding-top: 20px;
-}
-
-.admin-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #0056b3;
-    color: white;
-    padding: 20px;
-    margin: -20px -20px 20px -20px; /* Lebarkan ke tepi */
-}
-.admin-header h2 {
-    margin: 0;
-    padding: 0;
+.admin-container h2,
+.admin-container h3 {
+    color: #0056b3;
+    border-bottom: 2px solid #e6f0fa;
+    padding-bottom: 10px;
+    margin-top: 10px;
 }
 
 form {
@@ -101,11 +82,8 @@ form label {
     margin-bottom: -10px;
 }
 
-form input[type="email"],
-form input[type="password"],
 form input[type="date"],
-form input[type="text"],
-form select {
+form input[type="text"] {
     width: 100%;
     padding: 12px;
     font-size: 16px;
@@ -149,4 +127,4 @@ button.secondary:hover { background-color: #5a6268; }
 }
 #upcoming-leave-list li .details { font-size: 0.9em; line-height: 1.6; }
 #upcoming-leave-list li .details strong { font-size: 1.1em; color: #333; }
-#login-error, #admin-error { color: #c9302c; font-weight: bold; }
+#admin-error { color: #c9302c; font-weight: bold; }
