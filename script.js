@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // (Diambil dari gambar anda)
     // ----------------------------------------------------
     const firebaseConfig = {
-      apiKey: "AIzaSyAjLIfKwTHgw5kVqfR4EsJO0lLTxxa4ITE", // Ambil dari kod anda, baki tersembunyi
+      apiKey: "AIzaSyAjLIfKwTHgw5kVqfR4EsJO0lLTxxa4ITE", // API Key anda
       authDomain: "jadual-bertugas-kaunter-e8403.firebaseapp.com",
       projectId: "jadual-bertugas-kaunter-e8403",
       storageBucket: "jadual-bertugas-kaunter-e8403.firebasestorage.app",
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore(); // Inisialisasi Firestore
 
-    // 3. Data Jadual (Asal - tidak berubah)
+    // 3. Data Jadual (Asal)
     const scheduleData = {
         "Minggu 1": { "Isnin": { pagi: "AISYAH", petang: "YEN" }, "Selasa": { pagi: "AHMAD", petang: "RAIS" }, "Rabu": { pagi: "JEN", petang: "AYU" }, "Khamis": { pagi: "YOH", petang: "AYU" }, "Jumaat": { pagi: "YEN", petang: "AHMAD" } },
         "Minggu 2": { "Isnin": { pagi: "RAIS", petang: "JEN" }, "Selasa": { pagi: "AISYAH", petang: "YOH" }, "Rabu": { pagi: "AYU", petang: "AHMAD" }, "Khamis": { pagi: "YEN", petang: "RAIS" }, "Jumaat": { pagi: "JEN", petang: "AISYAH" } },
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageTitle = document.querySelector('h1');
     const leaveList = document.getElementById('leave-list');
 
-    // 5. Logik Tarikh (Tidak berubah)
+    // 5. Logik Tarikh
     const days = ["Isnin", "Selasa", "Rabu", "Khamis", "Jumaat"];
     const dayMap = [null, "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", null];
     const today = new Date();
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cycleIndex = (currentWeekNum - 1) % weekKeys.length;
     const currentWeekKey = weekKeys[cycleIndex];
 
-    // 6. Fungsi untuk memaparkan jadual (Tidak berubah)
+    // 6. Fungsi untuk memaparkan jadual
     function renderSchedule(weekKey) {
         tableBody.innerHTML = '';
         const weekData = scheduleData[weekKey];
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 7. Fungsi untuk menyerlahkan hari (Tidak berubah)
+    // 7. Fungsi untuk menyerlahkan hari
     function highlightCurrentDay() {
         document.querySelectorAll('.today').forEach(el => el.classList.remove('today'));
         if (currentDayName) {
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 9. Fungsi dapatkan nombor minggu (Tidak berubah)
+    // 9. Fungsi dapatkan nombor minggu
     function getWeekNumber(d) {
         d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
         d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return weekNo;
     }
 
-    // 10. Isi pilihan <select> (Tidak berubah)
+    // 10. Isi pilihan <select>
     Object.keys(scheduleData).forEach(weekKey => {
         const option = document.createElement('option');
         option.value = weekKey;
@@ -139,10 +139,10 @@ document.addEventListener('DOMContentLoaded', () => {
         weekSelect.appendChild(option);
     });
 
-    // 11. Event listener (Tidak berubah)
+    // 11. Event listener
     weekSelect.addEventListener('change', (e) => renderSchedule(e.target.value));
 
-    // 12. Logik Permulaan (Tidak berubah)
+    // 12. Logik Permulaan
     pageTitle.textContent = `Jadual Bertugas Kaunter (${currentYear})`;
     weekSelect.value = currentWeekKey;
     renderSchedule(currentWeekKey);
