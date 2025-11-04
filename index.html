@@ -37,61 +37,35 @@
                 </ul>
         </div>
         
-    </div> <div class="container" id="admin-section">
-        
-        <button id="show-login-button" class="primary">Admin Login</button>
-
-        <div id="login-panel" class="hidden">
-            <h2>Admin Login</h2>
-            <div class="login-container">
-                <form id="login-form">
-                    <label for="login-email">E-mel</label>
-                    <input type="email" id="login-email" required>
-                    
-                    <label for="login-password">Kata Laluan</label>
-                    <input type="password" id="login-password" required>
-                    
-                    <button type="submit" class="primary">Log Masuk</button>
-                    <button type="button" id="cancel-login-button" class="secondary">Batal</button>
-                    <p id="login-error"></p>
-                </form>
-            </div>
-        </div>
-
-        <div id="admin-panel" class="hidden">
-            <div class="admin-header">
-                <h2>Panel Admin Cuti</h2>
-                <button id="logout-button" class="secondary">Log Keluar</button>
-            </div>
-            <div class="admin-container">
-                <h3>Tambah Cuti / Kursus Baru</h3>
-                <form id="add-leave-form">
-                    <label for="leave-date">Tarikh Cuti</label>
-                    <input type="date" id="leave-date" required>
-                    
-                    <label for="leave-original">Pegawai Asal (Yang Bercuti)</label>
-                    <input type="text" id="leave-original" placeholder="Cth: AHMAD" required>
-                    
-                    <label for="leave-ganti">Pegawai Ganti</label>
-                    <input type="text" id="leave-ganti" placeholder="Cth: ZAKI" required>
-                    
-                    <label for="leave-sebab">Sebab (Cth: Cuti Rehat)</label>
-                    <input type="text" id="leave-sebab" required>
-                    
-                    <button type="submit" class="primary">Tambah Rekod</button>
-                    <p id="admin-error"></p>
-                </form>
+    </div> <div class="container" id="update-section">
+        <div class="admin-container">
+            <h2>Panel Kemaskini Cuti</h2>
+            
+            <h3>Tambah Cuti / Kursus Baru</h3>
+            <form id="add-leave-form">
+                <label for="leave-date">Tarikh Cuti</label>
+                <input type="date" id="leave-date" required>
                 
-                <hr>
+                <label for="leave-original">Pegawai Asal (Yang Bercuti)</label>
+                <input type="text" id="leave-original" placeholder="Cth: AHMAD" required>
                 
-                <h3>Cuti Akan Datang & Hari Ini</h3>
-                <ul id="upcoming-leave-list">
-                    </ul>
-            </div>
+                <label for="leave-ganti">Pegawai Ganti</label>
+                <input type="text" id="leave-ganti" placeholder="Cth: ZAKI" required>
+                
+                <label for="leave-sebab">Sebab (Cth: Cuti Rehat)</label>
+                <input type="text" id="leave-sebab" required>
+                
+                <button type="submit" class="primary">Tambah Rekod</button>
+                <p id="admin-error"></p>
+            </form>
+            
+            <hr>
+            
+            <h3>Cuti Akan Datang & Hari Ini</h3>
+            <ul id="upcoming-leave-list">
+                </ul>
         </div>
-
     </div> <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script src="script.js"></script>
