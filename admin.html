@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Jadual Bertugas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container" id="login-container">
+        <h1>Admin Login</h1>
+        <div class="login-container">
+            <form id="login-form">
+                <label for="login-email">E-mel</label>
+                <input type="email" id="login-email" required>
+                
+                <label for="login-password">Kata Laluan</label>
+                <input type="password" id="login-password" required>
+                
+                <button type="submit" class="primary">Log Masuk</button>
+                <p id="login-error"></p>
+            </form>
+        </div>
+    </div>
+
+    <div class="container" id="admin-panel" style="display:none;">
+        <h1>Panel Admin Cuti</h1>
+        <div class="admin-container">
+            <p>Selamat datang, <span id="admin-email">...</span>! <button id="logout-button" class="secondary">Log Keluar</button></p>
+            
+            <hr>
+            
+            <h2>Tambah Cuti / Kursus Baru</h2>
+            <form id="add-leave-form">
+                <label for="leave-date">Tarikh Cuti</label>
+                <input type="date" id="leave-date" required>
+                
+                <label for="leave-original">Pegawai Asal (Yang Bercuti)</label>
+                <input type="text" id="leave-original" placeholder="Cth: AHMAD" required>
+                
+                <label for="leave-ganti">Pegawai Ganti</label>
+                <input type="text" id="leave-ganti" placeholder="Cth: ZAKI" required>
+                
+                <label for="leave-sebab">Sebab (Cth: Cuti Rehat)</label>
+                <input type="text" id="leave-sebab" required>
+                
+                <button type="submit" class="primary">Tambah Rekod</button>
+                <p id="admin-error"></p>
+            </form>
+            
+            <hr>
+            
+            <h2>Cuti Akan Datang & Hari Ini</h2>
+            <ul id="upcoming-leave-list">
+                </ul>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>
