@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Data Jadual (Diambil dari PDF anda)
-    [cite_start]// Nota: "AHAMD" dari Week 3 [cite: 4] telah dibetulkan kepada "AHMAD" untuk konsistensi
+    // Nota: "AHAMD" dari Week 3 telah dibetulkan kepada "AHMAD" untuk konsistensi
     const scheduleData = {
         "Minggu 1": {
             "Isnin":  { pagi: "AISYAH", petang: "YEN" },
@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
             "Rabu":   { pagi: "JEN", petang: "AYU" },
             "Khamis": { pagi: "YOH", petang: "AYU" },
             "Jumaat": { pagi: "YEN", petang: "AHMAD" }
-            [cite_start]// [cite: 2]
         },
         "Minggu 2": {
             "Isnin":  { pagi: "RAIS", petang: "JEN" },
@@ -18,15 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
             "Rabu":   { pagi: "AYU", petang: "AHMAD" },
             "Khamis": { pagi: "YEN", petang: "RAIS" },
             "Jumaat": { pagi: "JEN", petang: "AISYAH" }
-            [cite_start]// [cite: 3]
         },
         "Minggu 3": {
             "Isnin":  { pagi: "YOH", petang: "AHMAD" },
             "Selasa": { pagi: "YEN", petang: "JEN" },
             "Rabu":   { pagi: "AISYAH", petang: "RAIS" },
             "Khamis": { pagi: "AYU", petang: "YOH" },
-            [cite_start]"Jumaat": { pagi: "AHMAD", petang: "JEN" } // AHAMD [cite: 4] dibetulkan
-            [cite_start]// [cite: 4]
+            "Jumaat": { pagi: "AHMAD", petang: "JEN" } // Komen di hujung baris seperti ini OK
         },
         "Minggu 4": {
             "Isnin":  { pagi: "YOH", petang: "AYU" },
@@ -34,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
             "Rabu":   { pagi: "YEN", petang: "AHMAD" },
             "Khamis": { pagi: "JEN", petang: "AISYAH" },
             "Jumaat": { pagi: "AYU", petang: "RAIS" }
-            [cite_start]// [cite: 5]
         },
         "Minggu 5": {
             "Isnin":  { pagi: "YEN", petang: "YOH" },
@@ -42,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
             "Rabu":   { pagi: "RAIS", petang: "JEN" },
             "Khamis": { pagi: "AYU", petang: "AHMAD" },
             "Jumaat": { pagi: "YEN", petang: "AISYAH" }
-            [cite_start]// [cite: 6]
         }
     };
 
@@ -65,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Cipta baris untuk Pagi (8.00am - 12.00pm)
         const rowPagi = document.createElement('tr');
-        rowPagi.innerHTML = '<td>8.00 am - 12.00 pm</td>'; [cite_start]// [cite: 2]
+        rowPagi.innerHTML = '<td>8.00 am - 12.00 pm</td>';
         days.forEach(day => {
             rowPagi.innerHTML += `<td>${weekData[day].pagi}</td>`;
         });
@@ -73,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Cipta baris untuk Petang (2.00pm - 4.30pm)
         const rowPetang = document.createElement('tr');
-        rowPetang.innerHTML = '<td>2.00 pm - 4.30 pm</td>'; [cite_start]// [cite: 2]
+        rowPetang.innerHTML = '<td>2.00 pm - 4.30 pm</td>';
         days.forEach(day => {
             rowPetang.innerHTML += `<td>${weekData[day].petang}</td>`;
         });
