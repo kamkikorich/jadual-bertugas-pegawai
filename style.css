@@ -32,7 +32,7 @@ h1 {
     font-size: 1.8em;
 }
 
-/* ... (Gaya Jadual dan Pilihan Minggu yang sedia ada) ... */
+/* Gaya Jadual dan Pilihan Minggu */
 .selector-container { padding: 20px; text-align: center; background-color: #fafafa; border-bottom: 1px solid #eee; }
 .selector-container label { font-weight: bold; margin-right: 10px; font-size: 1.1em; }
 #week-select { padding: 8px 12px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; cursor: pointer; }
@@ -43,7 +43,7 @@ h1 {
 #schedule-table th.today, #schedule-table td.today { background-color: #fffbe6; font-weight: bold; color: #a07400; }
 #schedule-table td.replaced-cell { background-color: #fdf8e2; color: #9c6000; font-weight: bold; font-style: italic; text-decoration: underline dotted; cursor: help; }
 
-/* ... (Gaya Makluman Cuti yang sedia ada) ... */
+/* Gaya Makluman Cuti */
 .leave-info-container { padding: 20px; background-color: #fcfcfc; border-top: 1px solid #eee; margin-top: 0; }
 .leave-info-container h3 { margin-top: 0; margin-bottom: 15px; color: #0056b3; border-bottom: 2px solid #e6f0fa; padding-bottom: 10px; }
 #leave-list { list-style-type: none; padding-left: 0; margin: 0; }
