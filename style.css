@@ -1,0 +1,90 @@
+/* Tetapan asas */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    color: #0056b3;
+    padding: 20px;
+    margin: 0;
+    background-color: #e6f0fa;
+}
+
+/* Bahagian Pilihan Minggu */
+.selector-container {
+    padding: 20px;
+    text-align: center;
+    background-color: #fafafa;
+    border-bottom: 1px solid #eee;
+}
+
+.selector-container label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#week-select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+/* Jadual */
+#schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+}
+
+#schedule-table th,
+#schedule-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: center;
+    min-width: 100px;
+}
+
+/* Bahagian Header Jadual */
+#schedule-table thead th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #555;
+    position: relative;
+}
+
+/* Baris Jadual (Masa) */
+#schedule-table tbody td:first-child {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* Sorotan (Highlight) Hari Semasa */
+#schedule-table th.today,
+#schedule-table td.today {
+    background-color: #fffbe6; /* Kuning lembut */
+    font-weight: bold;
+    color: #a07400;
+}
