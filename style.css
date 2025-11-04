@@ -24,16 +24,44 @@ body {
     border: 1px solid #dbe9f5;
 }
 
-h1 {
-    text-align: center;
-    color: #ffffff;
-    background-color: #0056b3;
-    padding: 25px 20px;
-    margin: 0;
-    font-size: 1.8em;
+/* =========================================
+ GAYA HEADER BARU YANG PROFESIONAL
+=========================================
+*/
+
+/* Gantikan H1 lama dan .logo-container lama dengan ini */
+.main-header {
+    display: flex; /* Susun logo dan tajuk sebelah-menyebelah */
+    align-items: center; /* Pusatkan secara menegak */
+    background-color: #0056b3; /* Latar belakang biru */
+    color: white;
+    padding: 15px 25px; /* Beri ruang */
 }
 
-/* Gaya Jadual (Sama seperti dulu) */
+.main-header .header-logo {
+    max-height: 90px; /* Kurangkan saiz logo sedikit */
+    width: auto;
+    margin-right: 25px; /* Jarak antara logo dan tajuk */
+    
+    /* Ini penting kerana logo anda ada latar putih (JPG) */
+    background: #ffffff; /* Letak latar putih di belakang logo */
+    border-radius: 8px; /* Bulatkan bucu logo */
+    padding: 5px; /* Beri sedikit ruang dalaman */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Bayang lembut */
+}
+
+/* Gaya untuk H1 di dalam header baru */
+.main-header h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 1.8em;
+    background-color: transparent; /* Buang latar belakang asal h1 */
+    text-align: left; /* Tukar dari 'center' */
+}
+/* ========================================= */
+
+
+/* Gaya Jadual */
 .selector-container { padding: 20px; text-align: center; background-color: #fafafa; border-bottom: 1px solid #eee; }
 .selector-container label { font-weight: bold; margin-right: 10px; font-size: 1.1em; }
 #week-select { padding: 8px 12px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; cursor: pointer; }
@@ -49,19 +77,9 @@ h1 {
 #leave-list li { padding: 10px; background-color: #fff; border: 1px solid #f0f0f0; border-radius: 5px; margin-bottom: 8px; font-size: 0.95em; line-height: 1.5; }
 #leave-list li .reason { display: block; font-style: italic; color: #555; font-size: 0.9em; margin-top: 4px; }
 
-/* =========================================
- GAYA BARU UNTUK PANEL KEMASKINI
-=========================================
-*/
-#update-section {
-    background-color: #fdfdfd;
-}
-
-.admin-container {
-    padding: 20px 30px 30px 30px;
-}
-
-/* --- PERUBAHAN DI SINI: Guna warna hijau --- */
+/* Gaya Panel Kemaskini */
+#update-section { background-color: #fdfdfd; }
+.admin-container { padding: 20px 30px 30px 30px; }
 .admin-container h2,
 .admin-container h3 {
     color: #4C9A00; /* Warna hijau profesional */
@@ -69,20 +87,8 @@ h1 {
     padding-bottom: 10px;
     margin-top: 10px;
 }
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 500px;
-    margin-bottom: 20px;
-}
-
-form label {
-    font-weight: bold;
-    margin-bottom: -10px;
-}
-
+form { display: flex; flex-direction: column; gap: 15px; max-width: 500px; margin-bottom: 20px; }
+form label { font-weight: bold; margin-bottom: -10px; }
 form input[type="date"],
 form input[type="text"] {
     width: 100%;
@@ -92,51 +98,15 @@ form input[type="text"] {
     border-radius: 5px;
     box-sizing: border-box;
 }
-
-/* Butang */
-button {
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-/* --- PERUBAHAN DI SINI: Butang utama kini berwarna hijau --- */
-button.primary { 
-    background-color: #5cb85c; /* Hijau "Success" */
-    color: white; 
-}
-button.primary:hover { 
-    background-color: #4cae4c; /* Hijau lebih gelap bila hover */
-}
-
-/* Butang Padam (Danger) kekal merah */
+button { padding: 12px 20px; font-size: 16px; font-weight: bold; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.2s; }
+button.primary { background-color: #5cb85c; color: white; }
+button.primary:hover { background-color: #4cae4c; }
 button.danger { background-color: #d9534f; color: white; }
 button.danger:hover { background-color: #c9302c; }
-
-/* Butang sekunder */
 button.secondary { background-color: #6c757d; color: white; }
 button.secondary:hover { background-color: #5a6268; }
-
-/* Senarai Cuti Admin */
-#upcoming-leave-list {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
-}
-#upcoming-leave-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
+#upcoming-leave-list { list-style-type: none; padding-left: 0; margin: 0; }
+#upcoming-leave-list li { display: flex; justify-content: space-between; align-items: center; padding: 15px; background-color: #f9f9f9; border: 1px solid #eee; border-radius: 5px; margin-bottom: 10px; }
 #upcoming-leave-list li .details { font-size: 0.9em; line-height: 1.6; }
 #upcoming-leave-list li .details strong { font-size: 1.1em; color: #333; }
 #admin-error { color: #c9302c; font-weight: bold; }
