@@ -5,8 +5,9 @@ body {
     background-image: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
     color: #333;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    flex-direction: column; /* Susun container secara menegak */
+    justify-content: flex-start;
+    align-items: center;
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
@@ -15,7 +16,7 @@ body {
 .container {
     width: 100%;
     max-width: 1000px;
-    margin: 0 auto;
+    margin: 0 auto 20px auto; /* Tambah margin bawah */
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 6px 15px rgba(0, 86, 179, 0.1); 
@@ -32,7 +33,7 @@ h1 {
     font-size: 1.8em;
 }
 
-/* Gaya Jadual dan Pilihan Minggu */
+/* Gaya Jadual (Sama seperti dulu) */
 .selector-container { padding: 20px; text-align: center; background-color: #fafafa; border-bottom: 1px solid #eee; }
 .selector-container label { font-weight: bold; margin-right: 10px; font-size: 1.1em; }
 #week-select { padding: 8px 12px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; cursor: pointer; }
@@ -42,8 +43,6 @@ h1 {
 #schedule-table tbody td:first-child { font-weight: bold; background-color: #f9f9f9; text-align: left; white-space: nowrap; }
 #schedule-table th.today, #schedule-table td.today { background-color: #fffbe6; font-weight: bold; color: #a07400; }
 #schedule-table td.replaced-cell { background-color: #fdf8e2; color: #9c6000; font-weight: bold; font-style: italic; text-decoration: underline dotted; cursor: help; }
-
-/* Gaya Makluman Cuti */
 .leave-info-container { padding: 20px; background-color: #fcfcfc; border-top: 1px solid #eee; margin-top: 0; }
 .leave-info-container h3 { margin-top: 0; margin-bottom: 15px; color: #0056b3; border-bottom: 2px solid #e6f0fa; padding-bottom: 10px; }
 #leave-list { list-style-type: none; padding-left: 0; margin: 0; }
@@ -51,25 +50,50 @@ h1 {
 #leave-list li .reason { display: block; font-style: italic; color: #555; font-size: 0.9em; margin-top: 4px; }
 
 /* =========================================
- GAYA BARU UNTUK LOGIN DAN ADMIN
+ GAYA BARU UNTUK PANEL ADMIN (SATU HALAMAN)
 =========================================
 */
+
+/* Sembunyikan panel secara lalai */
+.hidden {
+    display: none;
+}
+
+#admin-section {
+    background-color: #fdfdfd;
+    padding: 20px;
+}
+
+#show-login-button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+}
+
 .login-container, .admin-container {
-    padding: 30px;
+    padding-top: 20px;
 }
 
-.admin-container h2 {
-    color: #0056b3;
-    border-bottom: 2px solid #e6f0fa;
-    padding-bottom: 10px;
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0056b3;
+    color: white;
+    padding: 20px;
+    margin: -20px -20px 20px -20px; /* Lebarkan ke tepi */
+}
+.admin-header h2 {
+    margin: 0;
+    padding: 0;
 }
 
-/* Borang (Form) */
 form {
     display: flex;
     flex-direction: column;
     gap: 15px;
     max-width: 500px;
+    margin-bottom: 20px;
 }
 
 form label {
@@ -87,7 +111,7 @@ form select {
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Pastikan padding tidak 'pecahkan' kotak */
+    box-sizing: border-box;
 }
 
 /* Butang */
@@ -100,32 +124,19 @@ button {
     cursor: pointer;
     transition: background-color 0.2s;
 }
-
-button.primary {
-    background-color: #0056b3;
-    color: white;
-}
-button.primary:hover {
-    background-color: #004494;
-}
-
-button.danger {
-    background-color: #d9534f;
-    color: white;
-}
-button.danger:hover {
-    background-color: #c9302c;
-}
-
-button.secondary {
-    background-color: #6c757d;
-    color: white;
-}
-button.secondary:hover {
-    background-color: #5a6268;
-}
+button.primary { background-color: #0056b3; color: white; }
+button.primary:hover { background-color: #004494; }
+button.danger { background-color: #d9534f; color: white; }
+button.danger:hover { background-color: #c9302c; }
+button.secondary { background-color: #6c757d; color: white; }
+button.secondary:hover { background-color: #5a6268; }
 
 /* Senarai Cuti Admin */
+#upcoming-leave-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
 #upcoming-leave-list li {
     display: flex;
     justify-content: space-between;
@@ -136,18 +147,6 @@ button.secondary:hover {
     border-radius: 5px;
     margin-bottom: 10px;
 }
-
-#upcoming-leave-list li .details {
-    font-size: 0.9em;
-    line-height: 1.6;
-}
-#upcoming-leave-list li .details strong {
-    font-size: 1.1em;
-    color: #333;
-}
-
-/* Mesej Ralat */
-#login-error, #admin-error {
-    color: #c9302c;
-    font-weight: bold;
-}
+#upcoming-leave-list li .details { font-size: 0.9em; line-height: 1.6; }
+#upcoming-leave-list li .details strong { font-size: 1.1em; color: #333; }
+#login-error, #admin-error { color: #c9302c; font-weight: bold; }
