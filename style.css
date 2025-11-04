@@ -61,10 +61,11 @@ h1 {
     padding: 20px 30px 30px 30px;
 }
 
+/* --- PERUBAHAN DI SINI: Guna warna hijau --- */
 .admin-container h2,
 .admin-container h3 {
-    color: #0056b3;
-    border-bottom: 2px solid #e6f0fa;
+    color: #4C9A00; /* Warna hijau profesional */
+    border-bottom: 2px solid #e8f5e0; /* Border hijau lembut */
     padding-bottom: 10px;
     margin-top: 10px;
 }
@@ -102,10 +103,21 @@ button {
     cursor: pointer;
     transition: background-color 0.2s;
 }
-button.primary { background-color: #0056b3; color: white; }
-button.primary:hover { background-color: #004494; }
+
+/* --- PERUBAHAN DI SINI: Butang utama kini berwarna hijau --- */
+button.primary { 
+    background-color: #5cb85c; /* Hijau "Success" */
+    color: white; 
+}
+button.primary:hover { 
+    background-color: #4cae4c; /* Hijau lebih gelap bila hover */
+}
+
+/* Butang Padam (Danger) kekal merah */
 button.danger { background-color: #d9534f; color: white; }
 button.danger:hover { background-color: #c9302c; }
+
+/* Butang sekunder */
 button.secondary { background-color: #6c757d; color: white; }
 button.secondary:hover { background-color: #5a6268; }
 
