@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ----------------------------------------------------
     // 1. KONFIGURASI FIREBASE ANDA
-    // ----------------------------------------------------
     const firebaseConfig = {
       apiKey: "AIzaSyAjLIfKwTHgw5kVqfR4EsJO0lLTxxa4ITE", // API Key anda
       authDomain: "jadual-bertugas-kaunter-e8403.firebaseapp.com",
@@ -12,10 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
       appId: "1:692427244281:web:bdde79c211c1ed3011d828"
     };
     
-    // 2. Inisialisasi Firebase
+    // 2. Inisialisasi Firebase (Tiada Auth diperlukan)
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
-    const auth = firebase.auth();
 
     // 3. Data Jadual (Asal)
     const scheduleData = {
@@ -26,21 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
         "Minggu 5": { "Isnin": { pagi: "YEN", petang: "YOH" }, "Selasa": { pagi: "AHMAD", petang: "AISYAH" }, "Rabu": { pagi: "RAIS", petang: "JEN" }, "Khamis": { pagi: "AYU", petang: "AHMAD" }, "Jumaat": { pagi: "YEN", petang: "AISYAH" } }
     };
 
-    // 4. Dapatkan Elemen Halaman (Awam)
+    // 4. Dapatkan Elemen Halaman
     const weekSelect = document.getElementById('week-select');
     const tableBody = document.querySelector('#schedule-table tbody');
     const tableHead = document.querySelector('#schedule-table thead');
     const pageTitle = document.querySelector('h1');
     const leaveList = document.getElementById('leave-list');
-
-    // 5. Dapatkan Elemen Halaman (Admin)
-    const showLoginButton = document.getElementById('show-login-button');
-    const loginPanel = document.getElementById('login-panel');
-    const cancelLoginButton = document.getElementById('cancel-login-button');
-    const loginForm = document.getElementById('login-form');
-    const loginError = document.getElementById('login-error');
-    const adminPanel = document.getElementById('admin-panel');
-    const logoutButton = document.getElementById('logout-button');
+    
+    // 5. Dapatkan Elemen Halaman Kemaskini
     const addLeaveForm = document.getElementById('add-leave-form');
     const adminError = document.getElementById('admin-error');
     const upcomingLeaveList = document.getElementById('upcoming-leave-list');
@@ -138,54 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ====================================================
-    // BAHAGIAN B: LOGIK ADMIN (LOGIN, TAMBAH, PADAM)
+    // BAHAGIAN B: LOGIK KEMASKINI (TAMBAH, PADAM)
     // ====================================================
-
-    // Semak status login
-    auth.onAuthStateChanged(user => {
-        if (user) {
-            // Pengguna sudah log masuk
-            showLoginButton.classList.add('hidden'); // Sembunyi butang "Admin Login"
-            loginPanel.classList.add('hidden'); // Sembunyi borang login
-            adminPanel.classList.remove('hidden'); // Tunjuk panel admin penuh
-            loadUpcomingLeave(); // Muatkan senarai cuti
-        } else {
-            // Pengguna belum log masuk
-            showLoginButton.classList.remove('hidden'); // Tunjuk butang "Admin Login"
-            loginPanel.classList.add('hidden'); // Pastikan borang login tersembunyi
-            adminPanel.classList.add('hidden'); // Pastikan panel admin tersembunyi
-        }
-    });
-
-    // Tunjuk borang login bila butang diklik
-    showLoginButton.addEventListener('click', () => {
-        showLoginButton.classList.add('hidden');
-        loginPanel.classList.remove('hidden');
-    });
-
-    // Sembunyi borang login bila "Batal" diklik
-    cancelLoginButton.addEventListener('click', () => {
-        loginPanel.classList.add('hidden');
-        showLoginButton.classList.remove('hidden');
-        loginError.textContent = '';
-    });
-
-    // Logik Borang Login
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        loginError.textContent = 'Mencuba log masuk...';
-        auth.signInWithEmailAndPassword(email, password)
-            .catch(error => {
-                loginError.textContent = `Ralat: ${error.message}`;
-            });
-    });
-
-    // Logik Butang Log Keluar
-    logoutButton.addEventListener('click', () => {
-        auth.signOut();
-    });
 
     // Logik Borang Tambah Cuti
     addLeaveForm.addEventListener('submit', (e) => {
@@ -212,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Fungsi Muat Turun & Papar Senarai Cuti (untuk Admin)
+    // Fungsi Muat Turun & Papar Senarai Cuti (untuk Panel Kemaskini)
     async function loadUpcomingLeave() {
         upcomingLeaveList.innerHTML = '<li>Memuat turun senarai...</li>';
         try {
@@ -277,5 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Muatkan jadual untuk minggu semasa
     pageTitle.textContent = `Jadual Bertugas Kaunter (${currentYear})`;
     weekSelect.value = currentWeekKey;
-    renderSchedule(currentWeekKey); // Ini akan memuatkan jadual dan data cuti awam
+    renderSchedule(currentWeekKey); // Muatkan jadual awam
+    loadUpcomingLeave(); // Muatkan senarai kemaskini
 });
