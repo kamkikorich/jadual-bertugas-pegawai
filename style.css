@@ -1,7 +1,9 @@
 /* Tetapan asas */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #f4f7f6;
+    /* Latar belakang gradient biru muda - diinspirasikan dari imej */
+    background-color: #f0f7ff; /* Warna fallback jika gradient gagal */
+    background-image: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
     color: #333;
     display: flex;
     justify-content: center;
@@ -16,17 +18,21 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 10px; /* Bulatkan bucu sedikit */
+    /* Bayang biru lembut untuk efek 'terapung' */
+    box-shadow: 0 6px 15px rgba(0, 86, 179, 0.1); 
     overflow: hidden;
+    border: 1px solid #dbe9f5; /* Border biru lembut */
 }
 
 h1 {
     text-align: center;
-    color: #0056b3;
-    padding: 20px;
+    /* Guna warna biru gelap dari logo PERKESO */
+    color: #ffffff;
+    background-color: #0056b3; /* Biru korporat yang tegas */
+    padding: 25px 20px;
     margin: 0;
-    background-color: #e6f0fa;
+    font-size: 1.8em; /* Besarkan sikit tajuk */
 }
 
 /* Bahagian Pilihan Minggu */
@@ -40,6 +46,7 @@ h1 {
 .selector-container label {
     font-weight: bold;
     margin-right: 10px;
+    font-size: 1.1em;
 }
 
 #week-select {
@@ -67,10 +74,12 @@ h1 {
 
 /* Bahagian Header Jadual */
 #schedule-table thead th {
-    background-color: #f2f2f2;
+    /* Guna biru yang lebih lembut untuk header jadual */
+    background-color: #e6f0fa;
     font-weight: bold;
-    color: #555;
+    color: #0056b3; /* Padankan dengan warna tajuk */
     position: relative;
+    font-size: 1.1em;
 }
 
 /* Baris Jadual (Masa) */
@@ -87,4 +96,54 @@ h1 {
     background-color: #fffbe6; /* Kuning lembut */
     font-weight: bold;
     color: #a07400;
+}
+
+/* Gaya untuk sel yang diganti */
+#schedule-table td.replaced-cell {
+    background-color: #fdf8e2; /* Kuning air */
+    color: #9c6000;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline dotted;
+    cursor: help; /* Tunjuk ikon bantuan bila hover */
+}
+
+/* Gaya untuk bekas Makluman Cuti */
+.leave-info-container {
+    padding: 20px;
+    background-color: #fcfcfc;
+    border-top: 1px solid #eee;
+    margin-top: 0; /* Rapatkan dengan jadual */
+}
+
+.leave-info-container h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #0056b3;
+    border-bottom: 2px solid #e6f0fa;
+    padding-bottom: 10px;
+}
+
+#leave-list {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#leave-list li {
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #f0f0f0;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+#leave-list li .reason {
+    display: block;
+    font-style: italic;
+    color: #555;
+    font-size: 0.9em;
+    margin-top: 4px;
 }
