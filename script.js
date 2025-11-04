@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       appId: "1:692427244281:web:bdde79c211c1ed3011d828"
     };
     
-    // 2. Inisialisasi Firebase (Tiada Auth diperlukan)
+    // 2. Inisialisasi Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
@@ -42,10 +42,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentYear = today.getFullYear();
     const currentDayName = dayMap[today.getDay()];
     const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-    const currentWeekNum = getWeekNumber(today);
-    const weekKeys = Object.keys(scheduleData);
-    const cycleIndex = (currentWeekNum - 1) % weekKeys.length;
-    const currentWeekKey = weekKeys[cycleIndex];
+
+    // --- LOGIK MINGGU TELAH DIBAIKI ---
+    // (Berdasarkan "Minggu keberapa dalam bulan ini")
+    const dayOfMonth = today.getDate(); // Cth: 4 (untuk 4 Nov)
+    const currentWeekOfMonth = Math.ceil(dayOfMonth / 7); // Cth: Math.ceil(4 / 7) = 1 (Minggu 1)
+    const weekKeys = Object.keys(scheduleData); // ["Minggu 1", "Minggu 2", ...]
+    
+    // Pastikan ia tidak melebihi 5 (index 4)
+    const cycleIndex = Math.min(currentWeekOfMonth - 1, weekKeys.length - 1); // Cth: 1 - 1 = 0
+    const currentWeekKey = weekKeys[cycleIndex]; // Cth: weekKeys[0] -> "Minggu 1"
+    // --- TAMAT LOGIK MINGGU DIBAIKI ---
 
     // ====================================================
     // BAHAGIAN A: LOGIK JADUAL AWAM (PUBLIC)
@@ -119,17 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function getWeekNumber(d) {
-        d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-        d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
-        var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-        var weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-        return weekNo;
-    }
-
     // ====================================================
     // BAHAGIAN B: LOGIK KEMASKINI (TAMBAH, PADAM)
-    // ====================================================
+    // =M==================================================
 
     // Logik Borang Tambah Cuti
     addLeaveForm.addEventListener('submit', (e) => {
@@ -148,8 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(() => {
             addLeaveForm.reset();
-            loadUpcomingLeave(); // Muat semula senarai cuti
-            renderSchedule(currentWeekKey); // Muat semula jadual awam jika ada perubahan hari ini
+            loadUpcomingLeave(); 
+            renderSchedule(currentWeekKey); // Muat semula jadual awam
         })
         .catch(error => {
             adminError.textContent = `Ralat: ${error.message}`;
@@ -220,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Muatkan jadual untuk minggu semasa
     pageTitle.textContent = `Jadual Bertugas Kaunter (${currentYear})`;
-    weekSelect.value = currentWeekKey;
+    weekSelect.value = currentWeekKey; // Ini akan set dropdown ke "Minggu 1"
     renderSchedule(currentWeekKey); // Muatkan jadual awam
     loadUpcomingLeave(); // Muatkan senarai kemaskini
 });
