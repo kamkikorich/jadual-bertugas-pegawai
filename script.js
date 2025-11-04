@@ -29,36 +29,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const tableHead = document.querySelector('#schedule-table thead');
     const pageTitle = document.querySelector('h1');
     const leaveList = document.getElementById('leave-list');
-    
-    // 5. Dapatkan Elemen Halaman Kemaskini
     const addLeaveForm = document.getElementById('add-leave-form');
     const adminError = document.getElementById('admin-error');
     const upcomingLeaveList = document.getElementById('upcoming-leave-list');
 
-    // 6. Logik Tarikh
+    // 5. Logik Tarikh
     const days = ["Isnin", "Selasa", "Rabu", "Khamis", "Jumaat"];
     const dayMap = [null, "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", null];
     const today = new Date();
     const currentYear = today.getFullYear();
     const currentDayName = dayMap[today.getDay()];
     const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-
-    // --- LOGIK MINGGU TELAH DIBAIKI ---
-    // (Berdasarkan "Minggu keberapa dalam bulan ini")
-    const dayOfMonth = today.getDate(); // Cth: 4 (untuk 4 Nov)
-    const currentWeekOfMonth = Math.ceil(dayOfMonth / 7); // Cth: Math.ceil(4 / 7) = 1 (Minggu 1)
-    const weekKeys = Object.keys(scheduleData); // ["Minggu 1", "Minggu 2", ...]
-    
-    // Pastikan ia tidak melebihi 5 (index 4)
-    const cycleIndex = Math.min(currentWeekOfMonth - 1, weekKeys.length - 1); // Cth: 1 - 1 = 0
-    const currentWeekKey = weekKeys[cycleIndex]; // Cth: weekKeys[0] -> "Minggu 1"
-    // --- TAMAT LOGIK MINGGU DIBAIKI ---
+    const dayOfMonth = today.getDate();
+    const currentWeekOfMonth = Math.ceil(dayOfMonth / 7);
+    const weekKeys = Object.keys(scheduleData);
+    const cycleIndex = Math.min(currentWeekOfMonth - 1, weekKeys.length - 1);
+    const currentWeekKey = weekKeys[cycleIndex];
 
     // ====================================================
     // BAHAGIAN A: LOGIK JADUAL AWAM (PUBLIC)
     // ====================================================
 
     function renderSchedule(weekKey) {
+        // --- BAHAGIAN BARU: Reset header dulu ---
+        resetTableHeaders();
+        // --- TAMAT BAHAGIAN BARU ---
+
         tableBody.innerHTML = '';
         const weekData = scheduleData[weekKey];
         if (!weekData) return;
@@ -70,11 +66,52 @@ document.addEventListener('DOMContentLoaded', () => {
         rowPetang.innerHTML = '<td>2.00 pm - 4.30 pm</td>';
         days.forEach(day => rowPetang.innerHTML += `<td>${weekData[day].petang}</td>`);
         tableBody.appendChild(rowPetang);
+        
         highlightCurrentDay();
+        
         if (weekKey === currentWeekKey) {
+            // Hanya jika minggu semasa, tunjuk cuti & tambah tarikh
             applyLeaveUpdates();
+            updateTableHeaders(today); // <-- PANGGIL FUNGSI BARU
         } else {
             leaveList.innerHTML = '<li>Makluman cuti hanya dipaparkan untuk minggu semasa.</li>';
+        }
+    }
+
+    // --- FUNGSI BARU: Set header kepada asal ---
+    function resetTableHeaders() {
+        const headers = tableHead.querySelectorAll('th');
+        if (headers.length > 5) {
+            headers[1].innerHTML = "Isnin";
+            headers[2].innerHTML = "Selasa";
+            headers[3].innerHTML = "Rabu";
+            headers[4].innerHTML = "Khamis";
+            headers[5].innerHTML = "Jumaat";
+        }
+    }
+
+    // --- FUNGSI BARU: Tambah tarikh (cth: 4/11) pada header ---
+    function updateTableHeaders(todayDate) {
+        const headers = tableHead.querySelectorAll('th');
+        const dayIndex = todayDate.getDay(); // 0=Ahad, 1=Isnin, 2=Selasa...
+        
+        // Kira tarikh untuk hari Isnin minggu ini
+        const mondayOffset = (dayIndex === 0) ? -6 : 1 - dayIndex; // Jika Ahad (-6), jika Selasa (1-2 = -1)
+        const mondayDate = new Date(todayDate);
+        mondayDate.setDate(todayDate.getDate() + mondayOffset);
+
+        for (let i = 0; i < 5; i++) { // Loop untuk Isnin (0) hingga Jumaat (4)
+            const currentDayDate = new Date(mondayDate);
+            currentDayDate.setDate(mondayDate.getDate() + i);
+            
+            const day = currentDayDate.getDate();
+            const month = currentDayDate.getMonth() + 1;
+            const headerIndex = i + 1; // +1 sebab header[0] ialah "Masa / Hari"
+
+            if (headers[headerIndex]) {
+                // Guna <br> untuk letak tarikh di baris baru
+                headers[headerIndex].innerHTML = `${days[i]}<br>(${day}/${month})`;
+            }
         }
     }
 
@@ -83,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentDayName) {
             const headers = tableHead.querySelectorAll('th');
             headers.forEach((th, index) => {
-                if (th.textContent === currentDayName) {
+                if (th.textContent.startsWith(currentDayName)) { // Semak jika ia bermula dgn nama hari
                     th.classList.add('today');
                     tableBody.querySelectorAll('tr').forEach(row => {
                         if (row.cells[index]) row.cells[index].classList.add('today');
@@ -128,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ====================================================
     // BAHAGIAN B: LOGIK KEMASKINI (TAMBAH, PADAM)
-    // =M==================================================
+    // ====================================================
 
     // Logik Borang Tambah Cuti
     addLeaveForm.addEventListener('submit', (e) => {
@@ -174,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 li.innerHTML = `
                     <div class="details">
                         <strong>${leave.tarikh}</strong><br>
-                        ${leave.original} ➔ ${leave.ganti} (${leave.sebab})
+                        ${leave.original} ➔ ${leave.ganti} (${sebab})
                     </div>
                     <button class="danger delete-btn" data-id="${doc.id}">Padam</button>
                 `;
@@ -219,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Muatkan jadual untuk minggu semasa
     pageTitle.textContent = `Jadual Bertugas Kaunter (${currentYear})`;
-    weekSelect.value = currentWeekKey; // Ini akan set dropdown ke "Minggu 1"
+    weekSelect.value = currentWeekKey; 
     renderSchedule(currentWeekKey); // Muatkan jadual awam
     loadUpcomingLeave(); // Muatkan senarai kemaskini
 });
