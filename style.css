@@ -1,8 +1,7 @@
 /* Tetapan asas */
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    /* Latar belakang gradient biru muda - diinspirasikan dari imej */
-    background-color: #f0f7ff; /* Warna fallback jika gradient gagal */
+    background-color: #f0f7ff;
     background-image: linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%);
     color: #333;
     display: flex;
@@ -18,132 +17,137 @@ body {
     max-width: 1000px;
     margin: 0 auto;
     background-color: #ffffff;
-    border-radius: 10px; /* Bulatkan bucu sedikit */
-    /* Bayang biru lembut untuk efek 'terapung' */
+    border-radius: 10px;
     box-shadow: 0 6px 15px rgba(0, 86, 179, 0.1); 
     overflow: hidden;
-    border: 1px solid #dbe9f5; /* Border biru lembut */
+    border: 1px solid #dbe9f5;
 }
 
 h1 {
     text-align: center;
-    /* Guna warna biru gelap dari logo PERKESO */
     color: #ffffff;
-    background-color: #0056b3; /* Biru korporat yang tegas */
+    background-color: #0056b3;
     padding: 25px 20px;
     margin: 0;
-    font-size: 1.8em; /* Besarkan sikit tajuk */
+    font-size: 1.8em;
 }
 
-/* Bahagian Pilihan Minggu */
-.selector-container {
-    padding: 20px;
-    text-align: center;
-    background-color: #fafafa;
-    border-bottom: 1px solid #eee;
+/* ... (Gaya Jadual dan Pilihan Minggu yang sedia ada) ... */
+.selector-container { padding: 20px; text-align: center; background-color: #fafafa; border-bottom: 1px solid #eee; }
+.selector-container label { font-weight: bold; margin-right: 10px; font-size: 1.1em; }
+#week-select { padding: 8px 12px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; cursor: pointer; }
+#schedule-table { width: 100%; border-collapse: collapse; margin-top: 0; }
+#schedule-table th, #schedule-table td { border: 1px solid #ddd; padding: 12px 15px; text-align: center; min-width: 100px; }
+#schedule-table thead th { background-color: #e6f0fa; font-weight: bold; color: #0056b3; position: relative; font-size: 1.1em; }
+#schedule-table tbody td:first-child { font-weight: bold; background-color: #f9f9f9; text-align: left; white-space: nowrap; }
+#schedule-table th.today, #schedule-table td.today { background-color: #fffbe6; font-weight: bold; color: #a07400; }
+#schedule-table td.replaced-cell { background-color: #fdf8e2; color: #9c6000; font-weight: bold; font-style: italic; text-decoration: underline dotted; cursor: help; }
+
+/* ... (Gaya Makluman Cuti yang sedia ada) ... */
+.leave-info-container { padding: 20px; background-color: #fcfcfc; border-top: 1px solid #eee; margin-top: 0; }
+.leave-info-container h3 { margin-top: 0; margin-bottom: 15px; color: #0056b3; border-bottom: 2px solid #e6f0fa; padding-bottom: 10px; }
+#leave-list { list-style-type: none; padding-left: 0; margin: 0; }
+#leave-list li { padding: 10px; background-color: #fff; border: 1px solid #f0f0f0; border-radius: 5px; margin-bottom: 8px; font-size: 0.95em; line-height: 1.5; }
+#leave-list li .reason { display: block; font-style: italic; color: #555; font-size: 0.9em; margin-top: 4px; }
+
+/* =========================================
+ GAYA BARU UNTUK LOGIN DAN ADMIN
+=========================================
+*/
+.login-container, .admin-container {
+    padding: 30px;
 }
 
-.selector-container label {
-    font-weight: bold;
-    margin-right: 10px;
-    font-size: 1.1em;
-}
-
-#week-select {
-    padding: 8px 12px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-}
-
-/* Jadual */
-#schedule-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 0;
-}
-
-#schedule-table th,
-#schedule-table td {
-    border: 1px solid #ddd;
-    padding: 12px 15px;
-    text-align: center;
-    min-width: 100px;
-}
-
-/* Bahagian Header Jadual */
-#schedule-table thead th {
-    /* Guna biru yang lebih lembut untuk header jadual */
-    background-color: #e6f0fa;
-    font-weight: bold;
-    color: #0056b3; /* Padankan dengan warna tajuk */
-    position: relative;
-    font-size: 1.1em;
-}
-
-/* Baris Jadual (Masa) */
-#schedule-table tbody td:first-child {
-    font-weight: bold;
-    background-color: #f9f9f9;
-    text-align: left;
-    white-space: nowrap;
-}
-
-/* Sorotan (Highlight) Hari Semasa */
-#schedule-table th.today,
-#schedule-table td.today {
-    background-color: #fffbe6; /* Kuning lembut */
-    font-weight: bold;
-    color: #a07400;
-}
-
-/* Gaya untuk sel yang diganti */
-#schedule-table td.replaced-cell {
-    background-color: #fdf8e2; /* Kuning air */
-    color: #9c6000;
-    font-weight: bold;
-    font-style: italic;
-    text-decoration: underline dotted;
-    cursor: help; /* Tunjuk ikon bantuan bila hover */
-}
-
-/* Gaya untuk bekas Makluman Cuti */
-.leave-info-container {
-    padding: 20px;
-    background-color: #fcfcfc;
-    border-top: 1px solid #eee;
-    margin-top: 0; /* Rapatkan dengan jadual */
-}
-
-.leave-info-container h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
+.admin-container h2 {
     color: #0056b3;
     border-bottom: 2px solid #e6f0fa;
     padding-bottom: 10px;
 }
 
-#leave-list {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
+/* Borang (Form) */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
 }
 
-#leave-list li {
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #f0f0f0;
+form label {
+    font-weight: bold;
+    margin-bottom: -10px;
+}
+
+form input[type="email"],
+form input[type="password"],
+form input[type="date"],
+form input[type="text"],
+form select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    margin-bottom: 8px;
-    font-size: 0.95em;
-    line-height: 1.5;
+    box-sizing: border-box; /* Pastikan padding tidak 'pecahkan' kotak */
 }
 
-#leave-list li .reason {
-    display: block;
-    font-style: italic;
-    color: #555;
+/* Butang */
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button.primary {
+    background-color: #0056b3;
+    color: white;
+}
+button.primary:hover {
+    background-color: #004494;
+}
+
+button.danger {
+    background-color: #d9534f;
+    color: white;
+}
+button.danger:hover {
+    background-color: #c9302c;
+}
+
+button.secondary {
+    background-color: #6c757d;
+    color: white;
+}
+button.secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Senarai Cuti Admin */
+#upcoming-leave-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#upcoming-leave-list li .details {
     font-size: 0.9em;
-    margin-top: 4px;
+    line-height: 1.6;
+}
+#upcoming-leave-list li .details strong {
+    font-size: 1.1em;
+    color: #333;
+}
+
+/* Mesej Ralat */
+#login-error, #admin-error {
+    color: #c9302c;
+    font-weight: bold;
 }
